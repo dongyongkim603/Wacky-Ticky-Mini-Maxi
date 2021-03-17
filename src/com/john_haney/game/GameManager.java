@@ -13,13 +13,22 @@ public class GameManager {
         char[] row = {'X', 'X', 'X', 'X'};
         System.out.println(gb.hasRow(row) + "\n");
 
-        char[][] columnTest = {
-                {'X', '-', 'O', '-'},
-                {'O', '-', 'O', '-'},
-                {'X', '-', 'O', '-'},
-                {'X', '-', 'O', '-'}
+        char[][] testboard4 = {
+                {'-', '-', 'O', '-'},
+                {'O', '-', '-', '-'},
+                {'X', '-', '-', '-'},
+                {'-', '-', 'O', '-'}
         };
-        System.out.println(gb.hasColumn(columnTest));
+
+        char[][] testboard3 = {
+                {'O', '-', 'O'},
+                {'O', 'O', '-'},
+                {'O', '-', 'O'}
+        };
+
+        System.out.println(gb.hasColumn(testboard3));
+        System.out.println(gb.hasDiagonal(testboard4));
+        System.out.println(gb.hasDiagonal(testboard3));
     }
 
 }
