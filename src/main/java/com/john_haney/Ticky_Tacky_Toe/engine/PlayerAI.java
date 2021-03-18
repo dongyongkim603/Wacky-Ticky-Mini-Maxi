@@ -1,17 +1,16 @@
-package com.john_haney.engine;
+package main.java.com.john_haney.Ticky_Tacky_Toe.engine;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 public class PlayerAI extends AbstractGame {
 
     //Identifies which player
-    final private char IDENTIFIER;
+    private char identifier;
 
     //Constructors
     public PlayerAI(char id){
-        this.IDENTIFIER = id;
+        this.identifier = id;
     }
 
     /* -----------------------public methods -------------------------- */
@@ -23,7 +22,7 @@ public class PlayerAI extends AbstractGame {
      *
      * @param gameBoard
      */
-    public void makeRandomMove(char[][] gameBoard){
+    public void makeRandomMove(char[][] gameBoard, char id){
 
         //gets the list of available moves that can be made
         List<String> moves = listAvailableMoves(gameBoard);
@@ -38,16 +37,16 @@ public class PlayerAI extends AbstractGame {
         int x = Integer.parseInt(nextMove.substring(0,nextMove.indexOf(",")));
         int y = Integer.parseInt(nextMove.substring(nextMove.indexOf(",")+1));
 
-        updateBoard(getIDENTIFIER(), x, y);
+        updateBoard(id, x, y);
     }
 
     /*----------------------- Getters and Setters-----------------------*/
 
-    public char getIDENTIFIER() {
-        return IDENTIFIER;
+    public char getIdentifier() {
+        return identifier;
     }
 
     public static Random getRandom() {
-        return getRandom();
+        return AbstractGame.getRandom();
     }
 }

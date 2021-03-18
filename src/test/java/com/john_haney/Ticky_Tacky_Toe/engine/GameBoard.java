@@ -1,4 +1,4 @@
-package com.john_haney.engine;
+package test.java.com.john_haney.Ticky_Tacky_Toe.engine;
 
 public class GameBoard extends AbstractGame {
 
@@ -20,6 +20,7 @@ public class GameBoard extends AbstractGame {
             }
             System.out.println("");
         }
+        System.out.println("\n-----------");
     }
 
     /**
@@ -158,6 +159,6 @@ public class GameBoard extends AbstractGame {
     }
 
     public char[][] getGameBoard(){
-        return AbstractGame.getBoard();
+        return getBoard();
     }
 }

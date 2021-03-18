@@ -1,4 +1,4 @@
-package com.john_haney.engine;
+package main.java.com.john_haney.Ticky_Tacky_Toe.engine;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,26 +8,24 @@ public abstract class AbstractGame {
 
 
     //instance variable
-    final private int DIMENSIONS;
-    final private int TOTAL_MOVES;
+    private static int DIMENSIONS;
+    private static int TOTAL_MOVES;
 
     //class variables
     final private static int MIN_VAL = 2;
     final private static int MAX_VAL = 10;
 
     private static char[][] board;
-    private static Random random;
+    private static Random random = new Random();
 
     static int turnCount = 0;
 
     //constructors
-    public AbstractGame(){
-        this(MIN_VAL);
-    }
+    public AbstractGame(){    }
 
     public AbstractGame(int dimension){
-        generateBoard();
         this.DIMENSIONS = dimension;
+        generateBoard(dimension);
         TOTAL_MOVES = DIMENSIONS * DIMENSIONS;
     }
 
@@ -59,8 +57,8 @@ public abstract class AbstractGame {
     protected List<String> listAvailableMoves(char[][] gameBoard){
 
         List<String> moves = new ArrayList<>();
-        for (int i =0; i < getDIMENSIONS(); i++){
-            for(int j = 0; j < getDIMENSIONS(); j++){
+        for (int i = 0; i < gameBoard.length; i++){
+            for(int j = 0; j < gameBoard.length; j++){
                 if(gameBoard[i][j] == '#'){
                     moves.add(String.valueOf(i) + "," + String.valueOf(j));
                 }
@@ -79,7 +77,7 @@ public abstract class AbstractGame {
      */
     protected void updateBoard(char player, int x, int y){
         board[x][y] = player;
-        setTurnCount(getTotalMoves() + 1);
+        incrementTurn();
     }
 
     /*------------------ private methods -----------------------*/
@@ -87,14 +85,18 @@ public abstract class AbstractGame {
     /**
      * Initializes board and fills matrix with '#' char which symbolizes empty space.
      */
-    private void generateBoard() {
-        char[][] b = new char[DIMENSIONS][DIMENSIONS];
-        for (int i = 0; i < b.length; i++) {
-            for (int j = 0; j < b.length; j++) {
+    private void generateBoard(int dimensions) {
+        char[][] b = new char[dimensions][dimensions];
+        for (int i = 0; i < dimensions; i++) {
+            for (int j = 0; j < dimensions; j++) {
                 b[i][j] = '#';
             }
         }
         setBoard(b);
+    }
+
+    public static void incrementTurn(){
+        turnCount++;
     }
 
     /*------------------- Getters and Setters ------------------*/
