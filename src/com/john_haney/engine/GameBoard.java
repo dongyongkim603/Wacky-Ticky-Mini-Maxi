@@ -1,23 +1,23 @@
 package com.john_haney.engine;
 
+public class GameBoard extends AbstractGame {
 
-public class GameBoard {
 
-    private int dimension;
-    private char[][] board;
+    final private int DIMENSIONS;
 
+    //constructor
     public GameBoard(int dimension) {
-        this.dimension = dimension;
+        this.DIMENSIONS = dimension;
         generateBoard();
     }
 
-//-------------------------public methods----------------------
+/*---------------------public methods----------------------*/
 
     /**
      * prints board to console
      */
     public void displayBoard() {
-        for (char[] row : board) {
+        for (char[] row : getBoard()) {
             for (char c : row) {
                 System.out.print(c);
             }
@@ -26,41 +26,24 @@ public class GameBoard {
     }
 
     /**
-     *
-     * @param gameBoard
-     * @return
+     * Checks the board to see if there is a winner
+     * @param gameBoard The game board as a char matrix
+     * @return true if there is a winner.
      */
     public boolean hasWinner(char[][] gameBoard) {
         char[] row;
+        final boolean b = true;
+
         for(int i = 0; i < gameBoard.length; i++){
             row = extractRow(gameBoard, i);
             if(hasRow(row))
-                return true;
+                return b;
         }
-        if(hasColumn(gameBoard)) {
-            return true;
-        }else if(hasDiagonal(gameBoard)){
-            return true;
+        if(hasColumn(gameBoard) || hasDiagonal(gameBoard)) {
+            return b;
         }
         return false;
 
-    }
-
-    /**
-     * TODO: finish logic
-     * @param gameBoard
-     * @return
-     */
-    public boolean isDraw(char[][] gameBoard){
-        boolean draw = true;
-        for(char[] cA : gameBoard){
-            for(char c : cA){
-                if(c == '-'){
-                    return false;
-                }
-            }
-        }
-        return true;
     }
 
     /**
@@ -70,19 +53,19 @@ public class GameBoard {
         System.out.println("This is a " + getBoard() +"X" + getBoard() + " board");
     }
 
-//------------------private methods----------------------------
+/*------------------private methods---------------------------*/
 
     /**
      * Initializes board and fills board matrix with characters that will form board when printed
      */
     private void generateBoard() {
-        char[][] b = new char[dimension][dimension];
+        char[][] b = new char[DIMENSIONS][DIMENSIONS];
         for (int i = 0; i < b.length; i++) {
             for (int j = 0; j < b.length; j++) {
-                b[i][j] = '-';
+                b[i][j] = '#';
             }
         }
-        this.board = b;
+        setBoard(b);
     }
 
     /**
@@ -122,7 +105,7 @@ public class GameBoard {
     private boolean hasRow(char[] row) {
         int count = 0;
         for (char c : row) {
-            if (c == '-') {
+            if (c == '#') {
                 return false;
             } else if (c == 'X') {
                 count++;
@@ -187,10 +170,10 @@ public class GameBoard {
     /* -------------------- Getters and Setters ----------------*/
 
     public int getDimension() {
-        return dimension;
+        return DIMENSIONS;
     }
 
-    public char[][] getBoard() {
-        return board;
+    public char[][] getGameBoard(){
+        return AbstractGame.getBoard();
     }
 }
