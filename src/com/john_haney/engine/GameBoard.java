@@ -25,8 +25,92 @@ public class GameBoard {
         }
     }
 
-    public boolean hasWinner() {
+    /**
+     *
+     * @param gameBoard
+     * @return
+     */
+    public boolean hasWinner(char[][] gameBoard) {
+        char[] row;
+        for(int i = 0; i < gameBoard.length; i++){
+            row = extractRow(gameBoard, i);
+            if(hasRow(row))
+                return true;
+        }
+        if(hasColumn(gameBoard)) {
+            return true;
+        }else if(hasDiagonal(gameBoard)){
+            return true;
+        }
+        return false;
+
+    }
+
+    /**
+     * TODO: finish logic
+     * @param gameBoard
+     * @return
+     */
+    public boolean isDraw(char[][] gameBoard){
+        boolean draw = true;
+        for(char[] cA : gameBoard){
+            for(char c : cA){
+                if(c == '-'){
+                    return false;
+                }
+            }
+        }
         return true;
+    }
+
+    /**
+     * prints out the dimensions of the board
+     */
+    public void printBoardSize() {
+        System.out.println("This is a " + getBoard() +"X" + getBoard() + " board");
+    }
+
+//------------------private methods----------------------------
+
+    /**
+     * Initializes board and fills board matrix with characters that will form board when printed
+     */
+    private void generateBoard() {
+        char[][] b = new char[dimension][dimension];
+        for (int i = 0; i < b.length; i++) {
+            for (int j = 0; j < b.length; j++) {
+                b[i][j] = '-';
+            }
+        }
+        this.board = b;
+    }
+
+    /**
+     * Extracts the given row number from the matrix
+     * @param gameBoard a matrix representation of the board as chars
+     * @param rowNum the target row number
+     * @return the row of rowNum as a char array
+     */
+    private char[] extractRow(char[][] gameBoard, int rowNum){
+        char[] row = new char[gameBoard.length];
+        for(int i = 0; i < gameBoard.length; i++){
+            row[i] = gameBoard[rowNum][i];
+        }
+        return row;
+    }
+
+    /**
+     * Extracts the given row number from the matrix
+     * @param gameBoard a matrix representation of the board as chars
+     * @param colNum the target row number
+     * @return the row of rowNum as a char array
+     */
+    private char[] extractColumn(char[][] gameBoard, int colNum){
+        char[] column = new char[gameBoard.length];
+        for(int i = 0; i < gameBoard.length; i++){
+            column[i] = gameBoard[i][colNum];
+        }
+        return column;
     }
 
     /**
@@ -35,7 +119,7 @@ public class GameBoard {
      * @param row an char array representing one row
      * @return true if row has winner
      */
-    public boolean hasRow(char[] row) {
+    private boolean hasRow(char[] row) {
         int count = 0;
         for (char c : row) {
             if (c == '-') {
@@ -50,24 +134,16 @@ public class GameBoard {
     }
 
     /**
-     * Checks a matrix to see if there is a winner by column. Rotates the Matrix onto its side to make more efficient.
+     * Checks the a board to see if there is a winner by column by extracting the column and utilizing the hasRow() method
      *
      * @param gameBoard A char array of the board
      * @return true if there is a winner by column
      */
-    public boolean hasColumn(char[][] gameBoard) {
-        int column;
-
-        for (int i = gameBoard.length-1; i >= 0; i--) {
-            column = 0;
-            for (char[] chars : gameBoard) {
-                if (chars[i] == 'X') {
-                    column++;
-                } else {
-                    column--;
-                }
-            }
-            if(Math.abs(column) == gameBoard.length){
+    private boolean hasColumn(char[][] gameBoard) {
+        char[] column;
+        for (int i = 0; i < gameBoard.length; i++) {
+            column = extractColumn(gameBoard, i);
+            if(hasRow(column)){
                 return true;
             }
         }
@@ -80,7 +156,7 @@ public class GameBoard {
      * @param gameBoard A char matrix representation of the game board
      * @return true if there is a winner of either right or left diagonal
      */
-    public boolean hasDiagonal(char[][] gameBoard){
+    private boolean hasDiagonal(char[][] gameBoard){
         int diagonalL = 0;
         int diagonalR = 0;
 
@@ -106,28 +182,6 @@ public class GameBoard {
             return true;
         else
             return false;
-    }
-
-//------------------private methods----------------------------
-
-    /**
-     * Initializes board and fills board matrix with characters that will form board when printed
-     */
-    private void generateBoard() {
-        char[][] b = new char[dimension][dimension];
-        for (int i = 0; i < b.length; i++) {
-            for (int j = 0; j < b.length; j++) {
-                b[i][j] = '-';
-            }
-        }
-        this.board = b;
-    }
-
-    /**
-     * prints out the dimensions of the board
-     */
-    public void printBoardSize() {
-        System.out.println("This is a " + getBoard() +"X" + getBoard() + " board");
     }
 
     /* -------------------- Getters and Setters ----------------*/

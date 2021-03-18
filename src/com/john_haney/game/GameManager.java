@@ -10,25 +10,23 @@ public class GameManager {
     public static void main(String[] args) {
         GameBoard gb = new GameBoard(4);
         gb.displayBoard();
-        char[] row = {'X', 'X', 'X', 'X'};
-        System.out.println(gb.hasRow(row) + "\n");
 
         char[][] testboard4 = {
-                {'-', '-', 'O', '-'},
-                {'O', '-', '-', '-'},
-                {'X', '-', '-', '-'},
-                {'-', '-', 'O', '-'}
+                {'X', '-', 'O', 'O'},
+                {'O', 'X', 'X', 'X'},
+                {'X', 'O', 'X', 'X'},
+                {'O', '-', 'O', 'X'}
         };
 
         char[][] testboard3 = {
                 {'O', '-', 'O'},
-                {'O', 'O', '-'},
-                {'O', '-', 'O'}
+                {'-', '-', '-'},
+                {'O', '-', 'X'}
         };
 
-        System.out.println(gb.hasColumn(testboard3));
-        System.out.println(gb.hasDiagonal(testboard4));
-        System.out.println(gb.hasDiagonal(testboard3));
+        System.out.println(gb.hasWinner(testboard4));
+        System.out.println(gb.hasWinner(testboard3));
+
     }
 
 }
