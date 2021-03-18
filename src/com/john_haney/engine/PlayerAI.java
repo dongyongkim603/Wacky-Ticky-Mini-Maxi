@@ -9,12 +9,9 @@ public class PlayerAI extends AbstractGame {
     //Identifies which player
     final private char IDENTIFIER;
 
-    private static Random random;
-
     //Constructors
     public PlayerAI(char id){
         this.IDENTIFIER = id;
-        this.random = new Random();
     }
 
     /* -----------------------public methods -------------------------- */
@@ -50,7 +47,7 @@ public class PlayerAI extends AbstractGame {
         return IDENTIFIER;
     }
 
-    public Random getRandom() {
-        return random;
+    public static Random getRandom() {
+        return getRandom();
     }
 }

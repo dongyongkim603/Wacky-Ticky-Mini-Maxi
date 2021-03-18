@@ -3,12 +3,9 @@ package com.john_haney.engine;
 public class GameBoard extends AbstractGame {
 
 
-    final private int DIMENSIONS;
-
     //constructor
     public GameBoard(int dimension) {
-        this.DIMENSIONS = dimension;
-        generateBoard();
+        super(dimension);
     }
 
 /*---------------------public methods----------------------*/
@@ -54,19 +51,6 @@ public class GameBoard extends AbstractGame {
     }
 
 /*------------------private methods---------------------------*/
-
-    /**
-     * Initializes board and fills board matrix with characters that will form board when printed
-     */
-    private void generateBoard() {
-        char[][] b = new char[DIMENSIONS][DIMENSIONS];
-        for (int i = 0; i < b.length; i++) {
-            for (int j = 0; j < b.length; j++) {
-                b[i][j] = '#';
-            }
-        }
-        setBoard(b);
-    }
 
     /**
      * Extracts the given row number from the matrix
@@ -170,7 +154,7 @@ public class GameBoard extends AbstractGame {
     /* -------------------- Getters and Setters ----------------*/
 
     public int getDimension() {
-        return DIMENSIONS;
+        return getDIMENSIONS();
     }
 
     public char[][] getGameBoard(){
