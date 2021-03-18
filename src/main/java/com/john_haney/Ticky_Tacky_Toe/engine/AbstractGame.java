@@ -105,8 +105,8 @@ public abstract class AbstractGame {
         return board;
     }
 
-    public static void setBoard(char[][] board) {
-        AbstractGame.board = board;
+    public static void setBoard(char[][] b) {
+        board = b;
     }
 
     public int getDIMENSIONS() {

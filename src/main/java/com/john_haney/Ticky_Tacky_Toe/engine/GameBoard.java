@@ -14,7 +14,7 @@ public class GameBoard extends AbstractGame {
      * prints board to console
      */
     public void displayBoard() {
-        for (char[] row : getBoard()) {
+        for (char[] row : getGameBoard()) {
             for (char c : row) {
                 System.out.print(c);
             }
@@ -34,10 +34,11 @@ public class GameBoard extends AbstractGame {
 
         for(int i = 0; i < gameBoard.length; i++){
             row = extractRow(gameBoard, i);
-            if(hasRow(row))
+            if(hasWonByRow(row)) {
                 return b;
+            }
         }
-        if(hasColumn(gameBoard) || hasDiagonal(gameBoard)) {
+        if(hasWonByColumn(gameBoard) || hasWonByDiagonal(gameBoard)) {
             return b;
         }
         return false;
@@ -55,6 +56,7 @@ public class GameBoard extends AbstractGame {
 
     /**
      * Extracts the given row number from the matrix
+     *
      * @param gameBoard a matrix representation of the board as chars
      * @param rowNum the target row number
      * @return the row of rowNum as a char array
@@ -69,11 +71,12 @@ public class GameBoard extends AbstractGame {
 
     /**
      * Extracts the given row number from the matrix
+     *
      * @param gameBoard a matrix representation of the board as chars
      * @param colNum the target row number
      * @return the row of rowNum as a char array
      */
-    private char[] extractColumn(char[][] gameBoard, int colNum){
+    public char[] extractColumn(char[][] gameBoard, int colNum){
         char[] column = new char[gameBoard.length];
         for(int i = 0; i < gameBoard.length; i++){
             column[i] = gameBoard[i][colNum];
@@ -87,15 +90,16 @@ public class GameBoard extends AbstractGame {
      * @param row an char array representing one row
      * @return true if row has winner
      */
-    private boolean hasRow(char[] row) {
+    private boolean hasWonByRow(char[] row) {
         int count = 0;
+        char firstVal = row[0];
         for (char c : row) {
             if (c == '#') {
                 return false;
-            } else if (c == 'X') {
-                count++;
-            } else {
-                count--;
+            } else if(firstVal == '#') {
+                return false;
+            }else if (c == firstVal) {
+                ++count;
             }
         }
         return Math.abs(count) == row.length;
@@ -107,11 +111,12 @@ public class GameBoard extends AbstractGame {
      * @param gameBoard A char array of the board
      * @return true if there is a winner by column
      */
-    private boolean hasColumn(char[][] gameBoard) {
+    private boolean hasWonByColumn(char[][] gameBoard) {
         char[] column;
+
         for (int i = 0; i < gameBoard.length; i++) {
             column = extractColumn(gameBoard, i);
-            if(hasRow(column)){
+            if(hasWonByRow(column)){
                 return true;
             }
         }
@@ -124,10 +129,9 @@ public class GameBoard extends AbstractGame {
      * @param gameBoard A char matrix representation of the game board
      * @return true if there is a winner of either right or left diagonal
      */
-    private boolean hasDiagonal(char[][] gameBoard){
+    private boolean hasWonByDiagonal(char[][] gameBoard){
         int diagonalL = 0;
         int diagonalR = 0;
-
         for(int i= 0; i< gameBoard.length; i++){
             for(int j = 0; j < gameBoard.length; j++){
                 if(i == j){
@@ -146,10 +150,11 @@ public class GameBoard extends AbstractGame {
                 }
             }
         }
-        if(Math.abs(diagonalR) == gameBoard.length || Math.abs(diagonalL) == gameBoard.length)
+        if(Math.abs(diagonalR) == gameBoard.length || Math.abs(diagonalL) == gameBoard.length) {
             return true;
-        else
+        }else {
             return false;
+        }
     }
 
     /* -------------------- Getters and Setters ----------------*/

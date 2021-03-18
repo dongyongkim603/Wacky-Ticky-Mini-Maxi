@@ -48,6 +48,7 @@ public class GameManager extends AbstractGame {
                 player1.makeRandomMove(getBoard(), player1.getIdentifier());
                 winner = gameBoard.hasWinner(gameBoard.getGameBoard());
                 if(winner){
+                    gameBoard.displayBoard();
                     System.out.println(player1.getIdentifier() + " won!");
                     break;
                 }
@@ -57,6 +58,7 @@ public class GameManager extends AbstractGame {
                 player2.makeRandomMove(getBoard(), player2.getIdentifier());
                 winner = gameBoard.hasWinner(gameBoard.getGameBoard());
                 if(winner){
+                    gameBoard.displayBoard();
                     System.out.println(player2.getIdentifier() + " won!");
                     break;
                 }
@@ -83,36 +85,27 @@ public class GameManager extends AbstractGame {
         //sets the board size to user input
         GameBoard board = new GameBoard(4);
 
+        //-----test win condtions--------------
+        char[][] testBoard = {
+                {'O','X','X','O'},
+                {'X','O','X','X'},
+                {'#','O','O','O'},
+                {'X','O','X','#'}
+        };
+        char[] column = board.extractColumn(testBoard, 2);
+        System.out.println(board.hasWinner(testBoard));
+        for(char c : column){
+            System.out.println(c);
+        }
+        //--------end test win conditions -----------
+
+
         //sets
         PlayerAI player1 = new PlayerAI(manager.getFirstPlayer());
         PlayerAI player2 = new PlayerAI(manager.getSecondPlayer());
 
         System.out.println(manager.getFirstPlayer() + " goes first");
         runGame(player1, player2, board);
-//        boolean winner = false, draw = false;
-//        char lastPlayer = manager.getFirstPlayer();
-//        while (!winner || !draw){
-//            board.displayBoard();
-//            if(lastPlayer == manager.getFirstPlayer()){
-//                player1.makeRandomMove(board.getGameBoard());
-//                winner = board.hasWinner(board.getGameBoard());
-//                if(winner){
-//                    System.out.println(player1.getIDENTIFIER() + " won!");
-//                }
-//                draw = board.isDraw(board.getGameBoard());
-//            }else{
-//                player2.makeRandomMove(getBoard());
-//                winner = board.hasWinner(board.getGameBoard());
-//                if(winner){
-//                    System.out.println(player2.getIDENTIFIER() + " won!");
-//                }
-//                draw = board.isDraw(board.getGameBoard());
-//            }
-//            board.displayBoard();
-//            if(draw){
-//                System.out.println("it was a draw");
-//            }
-//        }
     }
 
     /*------------------Getters and Setters ----------------------*/
