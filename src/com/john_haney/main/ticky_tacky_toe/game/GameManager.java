@@ -100,7 +100,7 @@ public class GameManager extends AbstractGame {
                 winner = gameBoard.hasWinner(gameBoard.getGameBoard());
                 if(winner){
                     gameBoard.displayBoard();
-                    System.out.println(player1.getIdentifier() + " won!");
+                    System.out.println("\n         " + player1.getIdentifier() + " won!");
                     break;
                 }
 
@@ -116,7 +116,7 @@ public class GameManager extends AbstractGame {
                 winner = gameBoard.hasWinner(gameBoard.getGameBoard());
                 if(winner){
                     gameBoard.displayBoard();
-                    System.out.println(player2.getIdentifier() + " won!");
+                    System.out.println("\n         " + player2.getIdentifier() + " won!");
                     break;
                 }
 
@@ -129,7 +129,8 @@ public class GameManager extends AbstractGame {
 
             //exit loop if there was a draw
             if(draw){
-                System.out.println("it was a draw");
+                gameBoard.displayBoard();
+                System.out.println("\n         it was a draw");
                 break;
             }
         }

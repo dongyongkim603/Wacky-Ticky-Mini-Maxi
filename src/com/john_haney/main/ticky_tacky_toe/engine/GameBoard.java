@@ -14,13 +14,14 @@ public class GameBoard extends AbstractGame {
      * Displays the current state of the game board by printing the board to console
      */
     public void displayBoard() {
+        System.out.println("\n----- turn number:" + getTurnCount() + " -----");
         for (char[] row : getGameBoard()) {
+            System.out.print("         ");
             for (char c : row) {
                 System.out.print(c);
             }
             System.out.println("");
         }
-        System.out.println("\n----- turn number:" + getTurnCount() + " -----");
     }
 
     /**

@@ -1,4 +1,4 @@
-package main.java.com.john_haney.Ticky_Tacky_Toe.engine;
+package main.java.com.john_haney.ticky_tacky_toe.engine;
 
 import java.util.ArrayList;
 import java.util.List;

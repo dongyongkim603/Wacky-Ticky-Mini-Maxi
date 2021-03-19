@@ -1,4 +1,4 @@
-package main.java.com.john_haney.Ticky_Tacky_Toe.game;
+package main.java.com.john_haney.ticky_tacky_toe.game;
 
 import main.java.com.john_haney.Ticky_Tacky_Toe.engine.AbstractGame;
 import main.java.com.john_haney.Ticky_Tacky_Toe.engine.GameBoard;
